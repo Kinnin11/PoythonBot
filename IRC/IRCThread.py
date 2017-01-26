@@ -1,11 +1,14 @@
 import string
 import threading
 
-#Reads the chat and sends messages to CommandHandler
+
+# Reads the chat and sends messages to CommandHandler
+
 
 class IRCThread(threading.Thread):
     s = None
-    def __init__(self, socket, group=None, target=None, name=None, args=(), kwargs=None, verbose=None):
+
+    def __init__(self, socket):
         super(IRCThread, self).__init__()
         self.s = socket
 
@@ -19,7 +22,7 @@ class IRCThread(threading.Thread):
 
             for line in temp:
                 # Checks whether the message is PING because its a method of Twitch to check if you're afk
-                if (line[0] == "PING"):
+                if line[0] == "PING":
                     self.s.send("PONG %s\r\n" % line[1])
                 else:
                     # Splits the given string so we can work with it better
@@ -34,4 +37,3 @@ class IRCThread(threading.Thread):
                         # Sets the username variable to the actual username
                         usernamesplit = string.split(parts[1], "!")
                         username = usernamesplit[0]
-
