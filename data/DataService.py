@@ -1,3 +1,4 @@
+from application.Quotes.Quote import Quote
 from application.SendPoyo.Stream import Stream
 
 
@@ -15,8 +16,10 @@ class DataService:
     def getQuoteList(self):
         quotes = open("..\quotes.txt", 'r')
         quoteList = quotes.readlines()
-        quotes.close()
-        return quoteList
+        output = []
+        for s in quoteList:
+            output.append(Quote(s))
+        return output
 
     def saveQuote(self, quote):
         quotes = open("..\quotes.txt", 'a+')

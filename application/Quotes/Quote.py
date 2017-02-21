@@ -5,14 +5,13 @@ class Quote:
     content = ''
     lastUsed = datetime.now()
 
-    def __init__(self, concent):
-        self.content = concent
-        print self.lastUsed
+    def __init__(self, content):
+        self.content = content
         self.lastUsed -= timedelta(0, 3600)
-        print self.lastUsed
 
     def getQuote(self):
-        if self.lastUsed >= datetime.now():
-            return self.content
+        if self.lastUsed <= datetime.now():
+            self.lastUsed = datetime.now() + timedelta(0, 3600)
+            return self.content.strip('\n')
         else:
             return None
