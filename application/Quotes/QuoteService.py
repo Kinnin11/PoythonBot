@@ -4,7 +4,7 @@ from data.DataService import DataService
 
 
 class QuoteService:
-    quotesList = DataService.getQuoteList(DataService())
+    quotesList = DataService.getQuoteList()
 
     def getQuote(self):
         counter = 0

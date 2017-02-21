@@ -23,6 +23,7 @@ class IRCThread(threading.Thread):
             for line in temp:
                 # Checks whether the message is PING because its a method of Twitch to check if you're afk
                 if line[0] == "PING":
+                    print "PONG %s\r\n" % line[1]
                     self.s.send("PONG %s\r\n" % line[1])
                 else:
                     # Splits the given string so we can work with it better

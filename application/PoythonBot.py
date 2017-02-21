@@ -1,3 +1,3 @@
-from application.IRC.IRCHandler import IRCHandler
+from application.IRC import IRCHandler
 
-irc = IRCHandler()
+IRCHandler()

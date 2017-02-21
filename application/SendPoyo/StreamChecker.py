@@ -5,7 +5,7 @@ from data.DataService import DataService
 
 
 class StreamChecker(threading.Thread):
-    streamList = DataService().getStreams()
+    streamList = None
     handler = None
 
     def __init__(self, socket, irc, event):
@@ -13,6 +13,7 @@ class StreamChecker(threading.Thread):
         self.s = socket
         self.handler = irc
         self.stopped = event
+        self.streamList = DataService.getStreams(irc)
 
     def run(self):
         print('starting to check if streams are live')

@@ -8,6 +8,7 @@ from application.SendPoyo.StreamChecker import StreamChecker
 class IRCHandler:
     s = socket.socket()
     thread = None
+    thread2 = None
 
     def __init__(self):
         pass
@@ -25,12 +26,16 @@ class IRCHandler:
 
         self.thread = IRCThread.IRCThread(self.s)
         self.thread.start()
-        thread2 = StreamChecker(self.s, self, threading.Event())
-        thread2.start()
+        self.thread2 = StreamChecker(self.s, self, threading.Event())
+        self.thread2.start()
+
+    def refreshQuotes(self):
+        self.thread2 = StreamChecker(self.s, self, threading.Event())
+        self.thread2.start()
 
     def sendMessage(self, message, channel):
         self.s.send("PRIVMSG " + channel + " :" + message + "\r\n")
-        print ("PRIVMSG " + channel + " :" + message + "\r\n")
+        print ("PRIVMSG " + channel + " :" + message)
 
     def handleJoin(self, channel):
         self.s.send("JOIN " + channel + "\r\n")
