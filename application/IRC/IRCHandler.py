@@ -3,12 +3,14 @@ import threading
 
 from application.IRC import IRCThread
 from application.SendPoyo.StreamChecker import StreamChecker
+from data.DataService import DataService
 
 
 class IRCHandler:
     s = socket.socket()
     thread = None
     thread2 = None
+    streamList = None
 
     def __init__(self):
         pass
@@ -23,6 +25,9 @@ class IRCHandler:
         self.s.send("PASS " + PASS + "\r\n")
         self.s.send("NICK " + NICK + "\r\n")
         self.s.send("JOIN #poyobot \r\n")
+
+        # Loading the list of streams to check
+        self.streamList = DataService.getStreams(self)
 
         self.thread = IRCThread.IRCThread(self.s)
         self.thread.start()

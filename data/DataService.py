@@ -12,7 +12,7 @@ class DataService:
         output = []
         for s in streamList:
             split = s.split(';')
-            output.append(Stream(split[0], split[1], threading.Event(), irc))
+            output.append(Stream(split[0], threading.Event(), irc, interval=split[1]))
         streams.close()
         return output
 
@@ -36,3 +36,19 @@ class DataService:
         commands = open("..\command.txt", 'r').readlines()
         output = []
         # for s in commands:
+
+    @staticmethod
+    def addStream(stream):
+        streams = open("..\streams.txt", "a+")
+        streams.write("\n" + stream.getName() + ";{}".format(stream.getBaseInterval()))
+        streams.close()
+
+    @staticmethod
+    def deleteStream(user, streamList):
+        streams = open("..\streams.txt", "w")
+        for s in streamList:
+            streams.write("{};{}".format(s.name, s.interval))
+
+    @staticmethod
+    def saveSuggestion(data):
+        open("..\suggestion.txt", 'a+').write(data + "\n")

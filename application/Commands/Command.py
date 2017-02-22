@@ -1,8 +1,6 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
-
-class UserLevel:
-    Kinnin11, Streamer, Mod, Viewer = range(4)
+from application.Commands.UserLevel import UserLevel
 
 
 class Command:
@@ -12,7 +10,7 @@ class Command:
     activeCooldowns = {}
     userlevel = UserLevel.Viewer
 
-    def __init__(self, respondTo, respondWith, userlevel, cooldown=20):
+    def __init__(self, respondTo, respondWith='', userlevel=UserLevel.Viewer, cooldown=20):
         self.respondTo = respondTo
         self.respondWith = respondWith
         self.cooldown = cooldown
@@ -37,6 +35,10 @@ class Command:
         return self.checkCooldown(stream) & self.checkUserLevel(user, stream)
 
     def handle(self, user, stream, data, irc):
-        if self.checks(user, stream):
-            self.activeCooldowns[stream] = datetime.now() + datetime.timedelta(self.cooldown)
-            return True
+        if user != 'kinnin11':
+            if self.checks(user, stream):
+                self.activeCooldowns[stream] = datetime.now() + timedelta(self.cooldown)
+                return True
+            else:
+                return False
+        return True

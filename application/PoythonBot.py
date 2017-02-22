@@ -1,3 +1,6 @@
-from application.IRC import IRCHandler
+from application.IRC.IRCHandler import IRCHandler
+from data.DataService import DataService
 
-IRCHandler()
+irc = IRCHandler()
+
+streamList = DataService.getStreams(irc)

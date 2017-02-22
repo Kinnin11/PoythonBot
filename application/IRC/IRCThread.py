@@ -1,12 +1,12 @@
 import string
 import threading
 
-
-# Reads the chat and sends messages to CommandHandler
+from application.IRC.CommandHandler import CommandHandler
 
 
 class IRCThread(threading.Thread):
     s = None
+    commandHandler = CommandHandler()
 
     def __init__(self, socket):
         super(IRCThread, self).__init__()
@@ -34,7 +34,9 @@ class IRCThread(threading.Thread):
                             # Sets the message variable to the actual message sent
                             message = parts[2][:len(parts[2]) - 1]
                         except:
-                            message = ""
+                            message = ''
                         # Sets the username variable to the actual username
                         usernamesplit = string.split(parts[1], "!")
                         username = usernamesplit[0]
+                        if '!' in message[0]:
+                            self.commandHandler.handleCommand(message, username)

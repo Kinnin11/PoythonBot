@@ -1,11 +1,9 @@
 import threading
 
 import twitch.api.v3 as twitch
-from data.DataService import DataService
 
 
 class StreamChecker(threading.Thread):
-    streamList = None
     handler = None
 
     def __init__(self, socket, irc, event):
@@ -13,7 +11,6 @@ class StreamChecker(threading.Thread):
         self.s = socket
         self.handler = irc
         self.stopped = event
-        self.streamList = DataService.getStreams(irc)
 
     def run(self):
         print('starting to check if streams are live')
@@ -22,7 +19,7 @@ class StreamChecker(threading.Thread):
             self.checkStreams()
 
     def checkStreams(self):
-        for stream in self.streamList:
+        for stream in self.handler.streamList:
             print('checking stream ' + stream.name)
             if twitch.streams.by_channel(stream.name[1:]).get('stream') is not None and not stream.is_joined:
                 self.handler.handleJoin(stream.name)

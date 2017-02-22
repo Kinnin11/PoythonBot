@@ -8,7 +8,7 @@ class Stream(threading.Thread):
     is_joined = False
     irc = None
 
-    def __init__(self, name, interval, event, irc):
+    def __init__(self, name, event, irc, interval='10'):
         super(Stream, self).__init__()
         self.name = name
         self.interval = int(interval)
