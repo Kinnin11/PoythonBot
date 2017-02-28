@@ -52,3 +52,14 @@ class DataService:
     @staticmethod
     def saveSuggestion(data):
         open("..\suggestion.txt", 'a+').write(data + "\n")
+
+    @staticmethod
+    def loadCommands():
+        commands = open("..\command.txt").readlines()
+        output = []
+        print globals().keys()
+        for c in commands:
+            split = c.split(';')
+            output.append(
+                get_class(split[0])(split[1], respondWith=split[2], cooldown=int(split[3]), userlevel=split[4]))
+        return output

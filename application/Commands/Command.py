@@ -10,11 +10,19 @@ class Command:
     activeCooldowns = {}
     userlevel = UserLevel.Viewer
 
-    def __init__(self, respondTo, respondWith='', userlevel=UserLevel.Viewer, cooldown=20):
+    def __init__(self, respondTo, respondWith='', userlevel="Viewer", cooldown=20):
         self.respondTo = respondTo
         self.respondWith = respondWith
         self.cooldown = cooldown
-        self.userlevel = userlevel
+        if userlevel == "Kinnin11":
+            self.userlevel = UserLevel.Kinnin11
+        elif userlevel == "Mod":
+            self.userlevel = UserLevel.Mod
+        elif userlevel == "Viewer":
+            self.userlevel = UserLevel.Viewer
+        elif userlevel == "Streamer":
+            self.userlevel = UserLevel.Streamer
+
 
     def checkCooldown(self, stream):
         if stream in self.activeCooldowns:

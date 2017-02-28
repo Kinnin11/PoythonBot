@@ -1,0 +1,1 @@
+VariableMSGCommand;!test;test;20;Viewer

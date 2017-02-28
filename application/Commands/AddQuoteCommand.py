@@ -1,6 +1,5 @@
 from application.Commands.Command import Command
 from application.Commands.UserLevel import UserLevel
-from data.DataService import DataService
 
 
 class AddQuoteCommand(Command):
@@ -9,5 +8,5 @@ class AddQuoteCommand(Command):
 
     def handle(self, user, stream, data, irc):
         if Command.handle(self, user, stream, data, irc):
-            DataService.saveQuote(data)
+            # DataService.saveQuote(data)
             irc.sendMessage('quote added :)', stream)
