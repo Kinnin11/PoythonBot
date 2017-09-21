@@ -2,11 +2,11 @@ import threading
 
 from application.Commands.Command import Command
 from application.SendPoyo.Stream import Stream
-from data.DataService import DataService
 
 
 class RegisterCommand(Command):
     def handle(self, user, stream, data, irc):
+        from data.DataService import DataService
         if stream == '#poyobot':
             if Command.handle(self, user, stream, data, irc):
                 for s in irc.streamList:

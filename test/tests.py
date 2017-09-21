@@ -1,7 +1,5 @@
 # from application.Commands import *
+from application.Commands.Command import Command
 
-from data.DataService import DataService
-
-print globals().keys()
-
-DataService().loadCommands()
+com = Command()
+com2 = Command()

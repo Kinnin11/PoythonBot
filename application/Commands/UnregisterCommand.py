@@ -1,9 +1,9 @@
 from application.Commands.Command import Command
-from data.DataService import DataService
 
 
 class UnregisterCommand(Command):
     def handle(self, user, stream, data, irc):
+        from data.DataService import DataService
         if stream == '#poyobot':
             if Command.handle(self, user, stream, data, irc):
                 mockList = irc.streamList

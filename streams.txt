@@ -1,4 +1,2 @@
-#kinnin11;3
-#poyo;10
-#poyo;10
-#poyo;10
+#kinnin11;3;true
+#poyo;10;true

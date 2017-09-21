@@ -23,7 +23,6 @@ class Command:
         elif userlevel == "Streamer":
             self.userlevel = UserLevel.Streamer
 
-
     def checkCooldown(self, stream):
         if stream in self.activeCooldowns:
             return self.activeCooldowns.get(stream) <= datetime.now()
@@ -33,8 +32,10 @@ class Command:
         if self.userlevel == UserLevel.Viewer:
             return True
         if self.userlevel == UserLevel.Mod:
+            # TODO make moderators a thing
             return True
         if self.userlevel == UserLevel.Streamer:
+            # first character is always # so it removes that
             return user == stream[1:]
         if self.userlevel == UserLevel.Kinnin11:
             return user == "kinnin11"

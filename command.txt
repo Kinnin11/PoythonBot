@@ -1,1 +1,12 @@
-VariableMSGCommand;!test;test;20;Viewer
+AQ;!addquote;;K;1
+CI;!checkinterval;;V;10
+P;!poyo;(> ^ - ^)> TEST <(^ - ^ <);V;20
+VMSG;!bork;BORK;V;20
+Q;!quote;;V;20
+RQ;!refreshquotes;quotes refreshed :);K;1
+R;!register;;V;1
+SI;!setinterval;;V;2
+SQ;!suggestquote;;V;20
+U;!unregister;;V;2
+VMSG;!meta;<<<<|=Q^( `´Q)^ FIGHT ME;V;20
+QO;!setQuotes;;S;2

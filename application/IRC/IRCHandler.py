@@ -2,6 +2,7 @@ import socket
 import threading
 
 from application.IRC import IRCThread
+from application.Quotes.QuoteService import QuoteService
 from application.SendPoyo.StreamChecker import StreamChecker
 
 
@@ -10,9 +11,9 @@ class IRCHandler:
     thread = None
     thread2 = None
     streamList = None
+    quoteService = QuoteService()
 
     def __init__(self):
-        pass
         HOST = "irc.twitch.tv"
         NICK = "poyobot"
         PORT = 6667
@@ -29,11 +30,13 @@ class IRCHandler:
         from data.DataService import DataService
         self.streamList = DataService.getStreams(self)
 
-        self.thread = IRCThread.IRCThread(self.s)
+        # starting the IRC reader and StreamliveChecker
+        self.thread = IRCThread.IRCThread(self.s, self)
         self.thread.start()
         self.thread2 = StreamChecker(self.s, self, threading.Event())
         self.thread2.start()
 
+    #useful commands for interacting with IRC
     def refreshQuotes(self):
         self.thread2 = StreamChecker(self.s, self, threading.Event())
         self.thread2.start()
