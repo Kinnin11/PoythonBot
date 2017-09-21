@@ -44,6 +44,7 @@ class IRCThread(threading.Thread):
                         stream = string.split(parts[1], ' ')[2]
                         # if message is a command take it to the commandhandler
                         if '!' in message[0]:
+                            # splitting command and data
                             spit = str.split(message, ' ', 1)
                             command = spit[0]
                             data = ''

@@ -25,6 +25,7 @@ class Command:
 
     def checkCooldown(self, stream):
         if stream in self.activeCooldowns:
+            test = datetime.now()
             return self.activeCooldowns.get(stream) <= datetime.now()
         return True
 
@@ -46,7 +47,7 @@ class Command:
     def handle(self, user, stream, data, irc):
         if user != 'kinnin11':
             if self.checks(user, stream):
-                self.activeCooldowns[stream] = datetime.now() + timedelta(self.cooldown)
+                self.activeCooldowns[stream] = datetime.now() + timedelta(seconds=self.cooldown)
                 return True
             else:
                 return False

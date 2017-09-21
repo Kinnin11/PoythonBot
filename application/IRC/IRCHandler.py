@@ -36,7 +36,14 @@ class IRCHandler:
         self.thread2 = StreamChecker(self.s, self, threading.Event())
         self.thread2.start()
 
-    #useful commands for interacting with IRC
+    # method to grab a specific stream
+    def get_stream(self, name):
+        for s in self.streamList:
+            if s.name == name:
+                return s
+        return None
+
+    # useful commands for interacting with IRC
     def refreshQuotes(self):
         self.thread2 = StreamChecker(self.s, self, threading.Event())
         self.thread2.start()

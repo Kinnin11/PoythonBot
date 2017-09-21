@@ -9,9 +9,11 @@ class RegisterCommand(Command):
         from data.DataService import DataService
         if stream == '#poyobot':
             if Command.handle(self, user, stream, data, irc):
+                # looking up if user already exists
                 for s in irc.streamList:
                     if s.name[1:] == user:
                         irc.sendMessage("{}, I'm already sending you poyo!".format(user), stream)
+                # if non-existent, create
                 newStream = Stream("#" + user, threading.Event(), irc)
                 irc.streamList.append(newStream)
                 DataService.addStream(newStream)

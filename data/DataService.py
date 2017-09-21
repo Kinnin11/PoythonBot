@@ -20,7 +20,7 @@ class DataService:
     @staticmethod
     def saveStreams(irc):
         streamList = irc.streamList
-        streams = open('..\stream.txt', 'w')
+        streams = open('..\streams.txt', 'w')
         for s in streamList:
             streams.write('' + s.toString() + '\n')
         streams.close()
